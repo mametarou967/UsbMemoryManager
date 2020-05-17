@@ -33,7 +33,7 @@ class UsbMemory(db.Model):
 class Rireki(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    usbMemory_id = db.Column(db.Integer, db.ForeignKey('usbMemory.id'))
+    usbMemory_id = db.Column(db.Integer, db.ForeignKey('usb_memory.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     rireki_id = db.Column(db.Integer)
     
