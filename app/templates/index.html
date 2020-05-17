@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ current_user.username }} san konnichiha</h1>
+    
+    {% for usbMemory in usbMemorys %}
+    <div>
+        <p>{{ usbMemory.usb_number }} </p>
+        {% if usbMemory.user_id == None %}
+            <form action="" method="post">
+                <button name="loan" value={{ usbMemory.usb_number }}>貸出</button>
+            </form>
+        {% else %}
+            <form action="" method="post">
+                <button name="ret" value={{ usbMemory.usb_number }}>返却</button>
+            </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endblock %}
