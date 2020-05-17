@@ -29,6 +29,17 @@ flask db migrate -m "hogehoge"
 flask db upgrade
 ```
 
+4. usbMemoryデータの作成
+
+usb_numberソケット分だけ以下を実行します
+- flask shell
+- usbMemory = UsbMemory(usb_number=1)
+- db.session.add(usbMemory)
+- usbMemory = UsbMemory(usb_number=2)
+- db.session.add(usbMemory)
+- ...
+- db.session.commit()
+
 # 実行方法
 
 1.raspberry piでvenv環境下で動作するためコンソールで以下のように入力して実行します(venv環境作成時に実行している場合は不要)
