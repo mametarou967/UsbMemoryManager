@@ -19,6 +19,7 @@ pip install flask-wtf
 pip install flask-sqlalchemy
 pip install flask-migrate
 pip install flask-login
+pip install Adafruit_PCA9685
 ```
 
 3. db作成

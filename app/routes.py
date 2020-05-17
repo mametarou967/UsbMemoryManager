@@ -4,6 +4,7 @@ from app import db
 from app.forms import LoginForm
 from app.forms import RegistrationForm
 from app.models import User,UsbMemory
+from app.usbLocker import UsbLocker
 from flask_login import current_user, login_user
 from flask_login import logout_user
 from flask_login import login_required
@@ -18,10 +19,18 @@ def index():
         return render_template("index.html", title='Home Page', usbMemorys = usbMemorys)
     else: # POST
         if "loan" in request.form: # 貸出
+            # 物理的なロックの解除
+            usbLocker = UsbLocker(Number=int(request.form["loan"]))
+            usbLocker.Unlock()
+            # データベース更新
             usbMemory = UsbMemory.query.filter_by(usb_number=request.form["loan"]).first()
             usbMemory.user_id = current_user.id
             db.session.add(usbMemory)
         elif "ret" in request.form: # 返却
+            # 物理的なロックの解除
+            usbLocker = UsbLocker(Number=int(request.form["ret"]))
+            usbLocker.Lock()
+            # データベース更新
             usbMemory = UsbMemory.query.filter_by(usb_number=request.form["ret"]).first()
             usbMemory.user_id = None
             db.session.add(usbMemory)
