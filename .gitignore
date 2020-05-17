@@ -1,0 +1,8 @@
+# 無視するフォルダ
+__pycache__
+app/__pycache__
+migrations
+venv
+
+# 無視するファイル
+app.db
