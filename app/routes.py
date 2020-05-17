@@ -21,8 +21,11 @@ def index():
             usbMemory = UsbMemory.query.filter_by(usb_number=request.form["loan"]).first()
             usbMemory.user_id = current_user.id
             db.session.add(usbMemory)
-            db.session.commit()
-        #elif "ret" in request.form:  返却
+        elif "ret" in request.form: # 返却
+            usbMemory = UsbMemory.query.filter_by(usb_number=request.form["ret"]).first()
+            usbMemory.user_id = None
+            db.session.add(usbMemory)
+        db.session.commit()
         usbMemorys = UsbMemory.query.all()
         return render_template("index.html", title='Home Page', usbMemorys = usbMemorys)
 
